@@ -578,10 +578,11 @@ function renderLibraryItems() {
 function getLibraryPhotoSize(index = 0) {
     const sizeSteps = [74, 90, 106, 122, 138, 154, 170, 186];
     const baseWidth = sizeSteps[index % sizeSteps.length];
+    const minWidth = Math.round(baseWidth * .72);
     const fluidWidth = (baseWidth / 11.2).toFixed(2);
     const maxWidth = baseWidth + 12;
 
-    return `clamp(${baseWidth}px, ${fluidWidth}vw, ${maxWidth}px)`;
+    return `clamp(${minWidth}px, ${fluidWidth}vw, ${maxWidth}px)`;
 }
 
 function createLibraryElement(item, index) {
