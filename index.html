@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lou's Booth</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Princess+Sofia&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <a class="logo" href="index.html" aria-label="Back to landing">
+            Lou's Booth
+        </a>
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">about</a></li>
+                <li><a href="#photobooth">photobooth</a></li>
+                <li><a href="library.html">library</a></li>
+                <li><a href="#contact">contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-border-upper"></div>
+
+        <div class="nav-border" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+        </div>
+
+    </header>
+
+    <!-- ================= HERO ================= -->
+
+    <main id="top" class="hero">
+
+        <div class="hero-card">
+
+            <svg class="hero-blob"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 608 406"
+                aria-hidden="true">
+
+                <path fill="#F8ECD3"
+                    d="M510.591 388.82C474.861 413.44 436.601 406.65 398.301 392.3L373.271 383.25C347.421 373.9 320.911 368.34 303.451 391.21C290.371 370.38 267.781 373.25 245.031 380.6L209.381 392.98C169.541 406.81 130.871 412.5 93.7208 389.04C78.3008 401.43 59.6008 406.39 40.9608 402.58C18.2008 397.93 2.78081 378.49 3.85081 355.23C3.55081 344.71 6.46081 335.2 10.0508 325.31C-6.94919 293.35 4.85081 256.37 19.2208 224.83C20.7408 221.5 20.9008 219.34 18.6008 216.25L8.40081 202.53C13.4108 195.3 16.9208 188.25 20.6108 180.01C5.72081 147.53 -10.2392 110.21 8.51081 77.6198C-4.19919 58.2798 -2.16919 34.4798 13.5908 18.2398C35.8908 -4.7202 72.1708 -5.2802 96.4908 16.1398C130.881 -6.2402 167.611 -2.4402 205.021 9.9898L238.181 20.9698C262.971 29.0998 288.091 34.0198 303.531 11.3398C320.451 36.1398 348.021 28.6598 374.681 19.7398C389.471 14.7898 403.531 9.6698 418.611 5.6498C452.121 -3.0702 483.501 -2.5902 513.481 16.2198C530.891 2.2998 553.281 -2.8902 574.141 3.7898C593.771 10.0698 605.611 27.9198 604.971 48.2898C604.651 58.4898 602.501 67.7198 598.611 77.2698C616.401 110.24 601.211 147.15 586.361 179.53C589.511 186.75 593.441 193.17 598.671 199.74C594.261 206.42 589.841 212.54 586.581 220.49C601.391 253.22 617.251 292.35 598.541 324.93C610.921 343.9 609.271 367.11 594.891 383.72C573.261 408.7 535.801 411.06 510.601 388.83L510.591 388.82Z"/>
+            </svg>
+
+            <div class="hero-content">
+
+                <p class="welcome">LET'S MAKE</p>
+
+                <h1>Every Moment Count <br> at Lou's Booth</h1>
+
+                <p class="description">
+                    Create nostalgic photobooth photos right in your browser.
+                    Strike a pose, customize your photos, and download your own
+                    digital photobooth memories anytime, anywhere.
+                </p>
+
+            </div>
+
+        </div>
+
+        <a class="explore" href="#photobooth">
+            ↓ Down to Photobooth ↓
+        </a>
+
+    </main>
+
+    <!-- ================= PHOTOBOOTH ================= -->
+
+    <section id="photobooth" class="booth-section" aria-label="Photobooth">
+        <div class="booth-shell">
+            <div class="booth-title">
+                <p>Photo Booth</p>
+                <h2>Get Ready to Pose!</h2>
+            </div>
+
+            <div class="booth-workspace">
+                <section class="camera-panel" aria-label="Camera capture">
+                    <div class="panel-heading">
+                        <p id="statusLabel">Choose your setup</p>
+                        <span id="shotCounter">0 / 4</span>
+                    </div>
+
+                    <div class="camera-window" id="cameraWindow">
+                        <video id="camera" autoplay playsinline muted></video>
+                        <canvas id="captureCanvas" width="1200" height="900" hidden></canvas>
+
+                        <div class="countdown" id="countdown" aria-live="polite"></div>
+
+                        <div class="camera-permission" id="permissionLayer">
+                            <p>Choose your setup first.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="capture-actions">
+                        <button class="shutter-button" id="shutterButton" type="button" hidden aria-label="Take photo">
+                            <span></span>
+                        </button>
+                    </div>
+
+                    <div class="shot-tray" id="shotTray" aria-label="Captured photos"></div>
+                </section>
+
+                <section class="strip-panel" aria-label="Photobooth photo preview">
+                    <div class="strip-stage">
+                        <div class="strip-preview">
+                            <canvas id="stripCanvas" width="600" height="1800"></canvas>
+                            <div class="sticker-layer" id="stickerLayer" aria-label="Placed stickers"></div>
+                        </div>
+
+                        <div class="background-dock">
+                            <div class="background-tools" id="backgroundTools">
+                                <p class="control-label">Filter</p>
+                                <div class="filter-grid" id="filterChoices" aria-label="Photo filters"></div>
+                                <p class="control-label">Background</p>
+                                <div class="swatch-grid" id="backgroundChoices" aria-label="Background choices"></div>
+                                <button class="primary-button" id="toStickerButton" type="button" disabled>
+                                    Next
+                                </button>
+                            </div>
+
+                            <div class="sticker-tools" id="stickerTools" hidden>
+                                <p class="control-label">Sticker</p>
+                                <div class="sticker-grid" id="stickerChoices" aria-label="Sticker choices"></div>
+                                <div class="library-actions">
+                                    <button class="primary-button" id="downloadButton" type="button" disabled>
+                                        Save Photo
+                                    </button>
+                                    <button class="secondary-button" id="addLibraryButton" type="button" disabled>
+                                        Add to Library
+                                    </button>
+                                </div>
+                                <button class="secondary-button restart-booth-button" id="restartBoothButton" type="button">
+                                    Retake
+                                </button>
+                                <p class="save-status" id="saveStatus" aria-live="polite"></p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <aside class="controls-panel" aria-label="Photobooth controls">
+                    <div class="booth-progress" aria-hidden="true">
+                        <span data-step="setup"></span>
+                        <span data-step="capture"></span>
+                        <span data-step="retake"></span>
+                        <span data-step="background"></span>
+                        <span data-step="sticker"></span>
+                    </div>
+
+                    <div class="control-block stage-card" data-stage-panel="setup">
+                        <div class="control-group">
+                            <p class="control-label">Choose Layout</p>
+                            <div class="segmented-control orientation-control" role="group" aria-label="Photo style">
+                                <button class="segment orientation-segment active" data-orientation="landscape" type="button">
+                                    <span class="orientation-preview horizontal-preview" aria-hidden="true">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </span>
+                                    <span>Horizontal</span>
+                                </button>
+                                <button class="segment orientation-segment" data-orientation="portrait" type="button">
+                                    <span class="orientation-preview vertical-preview" aria-hidden="true">
+                                        <span></span>
+                                        <span></span>
+                                    </span>
+                                    <span>Vertical Crop</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <p class="control-label">Capture Mode</p>
+                            <div class="segmented-control" role="group" aria-label="Capture mode">
+                                <button class="segment active" data-capture-mode="auto" type="button">
+                                    <span>Auto</span>
+                                    <small>3-second countdown</small>
+                                </button>
+                                <button class="segment" data-capture-mode="manual" type="button">
+                                    <span>Manual</span>
+                                    <small>Press shutter yourself</small>
+                                </button>
+                            </div>
+                        </div>
+
+                        <button class="primary-button start-camera-button" id="startCamera" type="button">
+                            Start
+                        </button>
+
+                        <p class="setup-status" id="setupStatus" aria-live="polite"></p>
+                    </div>
+
+                    <div class="control-block stage-card" data-stage-panel="capture" hidden>
+                        <p class="selection-note">Pose time.</p>
+
+                        <label class="toggle-control">
+                            <span>
+                                <strong>Mirror</strong>
+                            </span>
+                            <input id="mirrorToggle" type="checkbox" checked>
+                            <span class="toggle-switch" aria-hidden="true"></span>
+                        </label>
+                    </div>
+
+                    <div class="control-block stage-card" data-stage-panel="retake" hidden>
+                        <div class="selection-note" id="retakeNote">Choose a photo above.</div>
+
+                        <div class="control-footer">
+                            <button class="secondary-button" id="retakeButton" type="button">
+                                Retake Selected
+                            </button>
+                            <button class="primary-button" id="toBackgroundButton" type="button">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="control-block stage-card" data-stage-panel="background" hidden>
+                        <p class="selection-note">Customize your photo with a background and filter, then press Next.</p>
+                    </div>
+
+                    <div class="control-block stage-card" data-stage-panel="sticker" hidden>
+                        <p class="selection-note">Decorate your photo with stickers.</p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+
+    <section id="contact" class="contact-section" aria-label="Contact">
+        <div class="contact-card">
+            <p class="contact-kicker">Lou's Booth</p>
+            <h2>get in touch!</h2>
+
+            <div class="contact-lines">
+                <div class="contact-line">
+                    <span>Email</span>
+                    <a href="mailto:plinkk05@gmail.com">plinkk05@gmail.com</a>
+                </div>
+
+                <div class="contact-line">
+                    <span>Phone</span>
+                    <a href="tel:+84847694716">+84 847 694 716</a>
+                </div>
+
+                <div class="contact-line">
+                    <span>Location</span>
+                    <p>Ho Chi Minh City, Vietnam</p>
+                </div>
+
+                <div class="contact-line">
+                    <span>Social / Platform</span>
+                    <div class="social-links" aria-label="Social links">
+                        <a class="social-link" href="https://www.instagram.com/_.plink/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                        </a>
+                        <a class="social-link" href="https://www.facebook.com/plink.05/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+                        </a>
+                        <a class="social-link" href="https://github.com/loulou675" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                            <i class="fa-brands fa-github" aria-hidden="true"></i>
+                        </a>
+                        <a class="social-link" href="https://www.threads.net/@_.plink" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+                            <i class="fa-brands fa-threads" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div>
+            <span>Email</span>
+            <a href="mailto:plinkk05@gmail.com">plinkk05@gmail.com</a>
+        </div>
+
+        <div>
+            <span>Phone</span>
+            <a href="tel:+84847694716">+84 847 694 716</a>
+        </div>
+
+        <div>
+            <span>Location</span>
+            <p>Ho Chi Minh City, Vietnam</p>
+        </div>
+
+        <div>
+            <span>Social / Platform</span>
+            <div class="social-links footer-social" aria-label="Social links">
+                <a class="social-link" href="https://www.instagram.com/_.plink/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                </a>
+                <a class="social-link" href="https://www.facebook.com/plink.05/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                    <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+                </a>
+                <a class="social-link" href="https://github.com/loulou675" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <i class="fa-brands fa-github" aria-hidden="true"></i>
+                </a>
+                <a class="social-link" href="https://www.threads.net/@_.plink" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+                    <i class="fa-brands fa-threads" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

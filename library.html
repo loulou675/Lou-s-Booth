@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lou's Booth Library</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Princess+Sofia&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js" defer></script>
+    <script src="library.js" defer></script>
+</head>
+
+<body class="library-page">
+
+    <header class="navbar">
+
+        <a class="logo" href="index.html" aria-label="Back to landing">
+            Lou's Booth
+        </a>
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">about</a></li>
+                <li><a href="index.html#photobooth">photobooth</a></li>
+                <li><a href="library.html">library</a></li>
+                <li><a href="index.html#contact">contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-border-upper"></div>
+
+        <div class="nav-border" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+        </div>
+
+    </header>
+
+    <main id="library" class="library-section" aria-label="Library">
+        <div class="library-heading">
+            <p class="contact-kicker">Lou's Booth</p>
+            <h1>Your Gallery</h1>
+        </div>
+
+        <div class="library-stage" id="libraryStage" aria-live="polite">
+            <p class="library-empty" id="libraryEmpty">No saved photos yet.</p>
+        </div>
+    </main>
+
+    <footer class="site-footer library-footer" aria-label="Library footer">
+        <div>
+            <span>Email</span>
+            <a href="mailto:plinkk05@gmail.com">plinkk05@gmail.com</a>
+        </div>
+
+        <div>
+            <span>Phone</span>
+            <p>+84 847 694 716</p>
+        </div>
+
+        <div>
+            <span>Location</span>
+            <p>Ho Chi Minh City, Vietnam</p>
+        </div>
+
+        <div class="footer-social">
+            <span>Social</span>
+            <div class="social-links">
+                <a class="social-link" href="https://www.instagram.com/_.plink/" target="_blank" rel="noopener" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                </a>
+                <a class="social-link" href="https://www.facebook.com/plink.05/" target="_blank" rel="noopener" aria-label="Facebook">
+                    <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+                </a>
+                <a class="social-link" href="https://github.com/loulou675" target="_blank" rel="noopener" aria-label="GitHub">
+                    <i class="fa-brands fa-github" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="site-dialog" id="libraryConfirm" role="dialog" aria-modal="true" aria-labelledby="libraryConfirmTitle" aria-describedby="libraryConfirmMessage" hidden>
+        <button class="site-dialog-backdrop" id="libraryConfirmBackdrop" type="button" aria-label="Cancel delete"></button>
+
+        <div class="site-dialog-card">
+            <p class="site-dialog-kicker">Warning</p>
+            <h2 id="libraryConfirmTitle">Are you sure?</h2>
+            <p id="libraryConfirmMessage">It will be permanently removed from your gallery.</p>
+
+            <div class="site-dialog-actions">
+                <button class="site-dialog-button site-dialog-button-soft" id="libraryConfirmCancel" type="button">Keep it</button>
+                <button class="site-dialog-button site-dialog-button-danger" id="libraryConfirmDelete" type="button">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="library-viewer" id="libraryViewer" role="dialog" aria-modal="true" aria-label="Saved photo preview" hidden>
+        <button class="library-viewer-backdrop" id="libraryViewerBackdrop" type="button" aria-label="Close preview"></button>
+
+        <div class="library-viewer-content">
+            <button class="library-viewer-close" id="libraryViewerClose" type="button" aria-label="Close preview">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                <span>Back</span>
+            </button>
+            <div class="library-viewer-photo">
+                <img id="libraryViewerImage" alt="Saved photo preview">
+            </div>
+            <div class="library-viewer-actions" aria-label="Preview actions">
+                <button class="library-viewer-save" id="libraryViewerSave" type="button" aria-label="Save photo">
+                    <i class="fa-solid fa-download" aria-hidden="true"></i>
+                </button>
+                <button class="library-viewer-delete" id="libraryViewerDelete" type="button" aria-label="Delete photo">
+                    <i class="fa-solid fa-trash" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
