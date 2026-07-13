@@ -7,7 +7,12 @@ if ("scrollRestoration" in history) {
 
 function resetLandingPosition() {
     if (window.location.hash) {
-        history.replaceState(null, "", window.location.pathname + window.location.search);
+        const target = document.querySelector(window.location.hash);
+
+        if (target) {
+            target.scrollIntoView({ behavior: "auto", block: "start" });
+            return;
+        }
     }
 
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
@@ -206,19 +211,19 @@ function playCountdownSound(number) {
 }
 
 function playUiClickSound() {
-    playTone(880, .055, "sine", .035);
-    playTone(1320, .06, "triangle", .024, .018);
-    window.setTimeout(() => playTone(1760, .035, "sine", .018), 34);
-    playNoiseClick(.01, .026, 4200, 5);
+    playTone(920, .055, "sine", .046);
+    playTone(1440, .06, "triangle", .032, .018);
+    window.setTimeout(() => playTone(1960, .035, "sine", .024), 34);
+    playNoiseClick(.012, .034, 4800, 5.8);
 }
 
 function playShutterSound() {
-    playNoiseClick(.018, .17, 3600, 4.2);
-    playTone(145, .045, "triangle", .08, .006);
-    window.setTimeout(() => playNoiseClick(.026, .2, 2400, 3.1), 34);
-    window.setTimeout(() => playTone(310, .06, "triangle", .07), 38);
-    window.setTimeout(() => playNoiseClick(.014, .14, 4700, 5), 74);
-    window.setTimeout(() => playTone(820, .035, "sine", .045), 78);
+    playNoiseClick(.009, .31, 8200, 10.5);
+    playTone(420, .026, "square", .074, .002);
+    window.setTimeout(() => playNoiseClick(.014, .3, 5600, 7.6), 22);
+    window.setTimeout(() => playTone(740, .03, "triangle", .086), 24);
+    window.setTimeout(() => playNoiseClick(.008, .24, 9600, 12), 50);
+    window.setTimeout(() => playTone(1680, .022, "sine", .072), 52);
 }
 
 function playNoiseClick(duration = .03, volume = .04, frequency = 1800, q = 1.9) {
