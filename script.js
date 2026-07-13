@@ -63,6 +63,7 @@ const MIN_STICKER_SIZE = 52;
 const MAX_STICKER_SIZE = 320;
 const LIBRARY_STORAGE_KEY = "lous-booth-library";
 const MAX_LIBRARY_ITEMS = 18;
+const LIBRARY_SIZE_STEPS = [74, 90, 106, 122, 138, 154, 170, 186];
 
 const state = {
     stage: "setup",
@@ -142,6 +143,20 @@ function activeBackground() {
 
 function activeFilter() {
     return filters.find((item) => item.id === state.filterId) || filters[0];
+}
+
+function getRandomLibrarySizeIndex() {
+    return Math.floor(Math.random() * LIBRARY_SIZE_STEPS.length);
+}
+
+function normalizeLibrarySizeIndex(sizeIndex) {
+    const numericIndex = Number(sizeIndex);
+
+    if (Number.isInteger(numericIndex) && numericIndex >= 0 && numericIndex < LIBRARY_SIZE_STEPS.length) {
+        return numericIndex;
+    }
+
+    return getRandomLibrarySizeIndex();
 }
 
 function clamp(value, min, max) {
@@ -1045,7 +1060,8 @@ async function addCurrentStripToLibrary() {
         libraryItems.unshift({
             id: `library-${Date.now()}`,
             src: imageUrl,
-            createdAt: Date.now()
+            createdAt: Date.now(),
+            sizeIndex: getRandomLibrarySizeIndex()
         });
 
         if (!saveLibraryItems(libraryItems.slice(0, MAX_LIBRARY_ITEMS))) return;
@@ -1071,12 +1087,15 @@ function loadLibraryItems() {
         const normalizedItems = parsedItems
             .filter((item) => item && typeof item.src === "string")
             .map((item, index) => {
-                if (item.id) return item;
+                const sizeIndex = normalizeLibrarySizeIndex(item.sizeIndex);
+
+                if (item.id && item.sizeIndex === sizeIndex) return item;
 
                 didNormalize = true;
                 return {
                     ...item,
-                    id: `library-${item.createdAt || Date.now()}-${index}`
+                    id: item.id || `library-${item.createdAt || Date.now()}-${index}`,
+                    sizeIndex
                 };
             });
 
@@ -1503,9 +1522,8 @@ function renderLibraryItems() {
     }
 }
 
-function getLibraryPhotoSize(index = 0) {
-    const sizeSteps = [74, 90, 106, 122, 138, 154, 170, 186];
-    const baseWidth = sizeSteps[index % sizeSteps.length];
+function getLibraryPhotoSize(item) {
+    const baseWidth = LIBRARY_SIZE_STEPS[normalizeLibrarySizeIndex(item?.sizeIndex)];
     const minWidth = Math.round(baseWidth * .72);
     const fluidWidth = (baseWidth / 11.2).toFixed(2);
     const maxWidth = baseWidth + 12;
@@ -1521,7 +1539,7 @@ function createLibraryElement(item, index) {
     const x = 8 + Math.random() * 84;
     const bottom = 10 + Math.random() * 28;
     const rotate = Math.random() * 28 - 14;
-    const photoSize = getLibraryPhotoSize(index);
+    const photoSize = getLibraryPhotoSize(item);
 
     itemElement.className = "library-item";
     itemElement.style.setProperty("--library-x", `${x}%`);
@@ -1927,7 +1945,52 @@ function drawImageCover(context, source, x, y, width, height) {
     context.drawImage(source, cropX, cropY, cropWidth, cropHeight, x, y, width, height);
 }
 
+function setupMobileMenu() {
+    document.querySelectorAll(".navbar").forEach((navbar) => {
+        const toggle = navbar.querySelector(".menu-toggle");
+        const nav = navbar.querySelector("nav");
+
+        if (!toggle || !nav) return;
+
+        const closeMenu = () => {
+            navbar.classList.remove("nav-open");
+            toggle.setAttribute("aria-expanded", "false");
+        };
+
+        toggle.addEventListener("click", (event) => {
+            event.stopPropagation();
+
+            const isOpen = navbar.classList.toggle("nav-open");
+
+            toggle.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        nav.addEventListener("click", (event) => {
+            const target = event.target instanceof Element ? event.target : null;
+
+            if (target?.closest("a")) {
+                closeMenu();
+            }
+        });
+
+        document.addEventListener("click", (event) => {
+            const target = event.target instanceof Element ? event.target : null;
+
+            if (target && !navbar.contains(target)) {
+                closeMenu();
+            }
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                closeMenu();
+            }
+        });
+    });
+}
+
 function init() {
+    setupMobileMenu();
     setupChoices();
     setupActiveChoiceStates();
     resetShots();
