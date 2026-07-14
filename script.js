@@ -98,6 +98,7 @@ const els = {
     video: document.getElementById("camera"),
     cameraWindow: document.getElementById("cameraWindow"),
     captureCanvas: document.getElementById("captureCanvas"),
+    selectedShotPreview: document.getElementById("selectedShotPreview"),
     stripCanvas: document.getElementById("stripCanvas"),
     stripPreview: document.querySelector(".strip-preview"),
     stickerLayer: document.getElementById("stickerLayer"),
@@ -741,6 +742,19 @@ async function runCountdown() {
     els.countdown.classList.remove("show");
 }
 
+function updateSelectedShotPreview() {
+    if (!els.selectedShotPreview) return;
+
+    const selectedShot = state.selectedShotIndex === null ? null : state.shots[state.selectedShotIndex];
+    const shouldShowPreview = state.stage === "retake" && !state.isCapturing && Boolean(selectedShot);
+
+    els.selectedShotPreview.hidden = !shouldShowPreview;
+
+    if (shouldShowPreview && els.selectedShotPreview.src !== selectedShot) {
+        els.selectedShotPreview.src = selectedShot;
+    }
+}
+
 function updateUi() {
     const total = totalShots();
     const completed = state.shots.filter(Boolean).length;
@@ -782,6 +796,7 @@ function updateUi() {
     els.shotTray.hidden = !["capture", "retake"].includes(state.stage);
     els.backgroundTools.hidden = state.stage !== "background";
     els.stickerTools.hidden = state.stage !== "sticker";
+    updateSelectedShotPreview();
 
     if (!state.sessionComplete) {
         els.retakeNote.textContent = completed ? "Finish all photos first." : "Choose a photo above.";
